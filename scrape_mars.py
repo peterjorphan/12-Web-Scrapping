@@ -65,9 +65,10 @@ def scrape():
     browser.visit(mars_weather_url)
     html_mw = browser.html
     soup_mw = bs(html_mw, 'html.parser')
-    mars_weather = soup_mw.find("p", class_="TweetTextSize TweetTextSize--normal js-tweet-text tweet-text").text
+    mars_weather = soup_mw.find("p", class_="TweetTextSize TweetTextSize--normal js-tweet-text tweet-text")
+    mars_weather.a.extract() # removes the anchor
     
-    data_dict['mars_weather'] = mars_weather
+    data_dict['mars_weather'] = mars_weather.text
     
     # ### Mars Facts
 
@@ -75,7 +76,8 @@ def scrape():
     # including Diameter, Mass, etc.
     browser.visit(mars_facts_url)
     table_df = pd.read_html(browser.url)[0]
-    table_df = table_df.rename(columns={0:'Fact', 1:'Value'})
+    table_df = table_df.rename(columns={1:'Value'}).set_index(0)
+    table_df.index.name = None
     
     # Use Pandas to convert the data to a HTML table string.
     html_table = table_df.to_html()

@@ -12,7 +12,6 @@ client = pymongo.MongoClient(conn)
 @app.route("/scrape")
 def scrape():
     from scrape_mars import scrape
-    # data_dict = scrape()
     # - Store the return value in Mongo as a Python dictionary.
     db = client.mars_db
     db.mars.drop()
@@ -25,10 +24,6 @@ def index():
     db = client.mars_db
     data_dict = db.mars.find_one()
     return render_template("index.html", dict=data_dict)
-
-# - Create a template HTML file called index.html that will take the mars data dictionary and display all of the data in the appropriate HTML elements. 
-# Use the following as a guide for what the final product should look like, but feel free to create your own design.
-
 
 if __name__ == '__main__':
     app.run(debug=True)

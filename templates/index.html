@@ -1,3 +1,5 @@
+<!-- - Create a template HTML file called index.html that will take the mars data dictionary and display all of the data in the appropriate HTML elements.  -->
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -34,6 +36,7 @@
     </div>
 
     <div class = "row">
+
       <div class = "col-lg-8">
        <h3><strong>Featured Mars Image</strong></h3>
        <img src={{dict.featured_image_url}} class="img-fluid">
@@ -42,12 +45,17 @@
       <div class = "col-lg-4">
         <div class = "img-thumbnail">
           <h5><strong>Current Weather On Mars</strong></h5>
-          <p>{{dict.mars_weather}}></p>
+          <p style='text-align:"right"'>{{dict.mars_weather}}</p>
         </div>
-        <h5><strong>Mars Facts</strong></h5>
-        {{dict.html_table |safe}}
+        <div class='small'>
+          <br>
+          <h5><strong>Mars Facts</strong></h5>
+          <p>{{dict.html_table |safe}}</p>
+        </div>
       </div>
+
     </div>
+
     <div class = "row text-center">
       <div class = "col-lg-12">
         <br><br>
@@ -55,6 +63,7 @@
         <hr>
       </div>
     </div>
+
     <div class = "row">
       {% for i in dict.hemi_dict %}
         <div class = "col-lg-6 img-thumbnail">
@@ -62,8 +71,7 @@
           <h5><strong>{{i.title}}</strong></h5>
         </div>
       {% endfor %}  
-  </div>
-
+    </div>
   
   </div>
 </body>
