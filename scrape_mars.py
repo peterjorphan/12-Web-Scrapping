@@ -76,8 +76,8 @@ def scrape():
     # including Diameter, Mass, etc.
     browser.visit(mars_facts_url)
     table_df = pd.read_html(browser.url)[0]
-    table_df = table_df.rename(columns={1:'Value'}).set_index(0)
-    table_df.index.name = None
+    table_df = table_df.rename(columns={0:'Description', 1:'Value'}).set_index('Description')
+    # table_df.index.name = None
     
     # Use Pandas to convert the data to a HTML table string.
     html_table = table_df.to_html()
